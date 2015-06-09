@@ -1,2 +1,2 @@
-# shoppingsystem
+# Shopping System
 Online shopping system
