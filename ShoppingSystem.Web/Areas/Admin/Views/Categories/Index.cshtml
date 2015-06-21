@@ -1,0 +1,16 @@
+﻿@model ICollection<ShoppingSystem.Web.Areas.Admin.Models.Shop.CategoryViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MenuName = "Shop";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="path"><a href="@Url.Content("~/admin/shop")">Online Shop</a> <i class="fa fa-angle-right"></i> Categories</div>
+
+<h4>Category List</h4>
+
+@foreach (var category in Model)
+{
+    <div>@category.Name</div>
+}

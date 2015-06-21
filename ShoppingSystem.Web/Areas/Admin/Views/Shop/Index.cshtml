@@ -4,5 +4,14 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Shop Index</h2>
+<div class="path">Online Shop</div>
+
+<div class="row">
+    <div class="col-xs-3 col-md-2">
+        <a href="@Url.Content("~/admin/shop/categories")" class="thumbnail">
+            <img src="@Url.Content("~/content/images/icons/categories_icon.png")" alt="Categories">
+        </a>
+        <div class="text-center">Categories</div>
+    </div>
+</div>
 

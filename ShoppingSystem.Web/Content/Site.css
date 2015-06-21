@@ -31,3 +31,12 @@ textarea {
     background-color: #fff;
     color: #333;
 }
+
+.path {
+    border-bottom: 1px solid #357ebd;
+    margin-bottom: 10px;
+}
+
+    .path a:hover {
+        text-decoration: none;
+    }
