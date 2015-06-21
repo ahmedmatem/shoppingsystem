@@ -10,18 +10,12 @@
         public ShoppingSystemDataContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShoppingSystemDataContext, Configuration>());
         }
 
         public static ShoppingSystemDataContext Create()
         {
             return new ShoppingSystemDataContext();
-        }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShoppingSystemDataContext, Configuration>());
-
-            base.OnModelCreating(modelBuilder);
         }
 
         public virtual IDbSet<Product> Products { get; set; }
