@@ -6,11 +6,65 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div class="path"><a href="@Url.Content("~/admin/shop")">Online Shop</a> <i class="fa fa-angle-right"></i> Categories</div>
+<div class="path"><a href="@Url.Content("~/admin/shop")"><i class="fa fa-shopping-cart"></i> Online Shop</a> <i class="fa fa-angle-right"></i> Categories</div>
 
-<h4>Category List</h4>
+
+<h4>Category List <a href="@Url.Content("~/admin/shop/categories/create")" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> New Category</a></h4>
 
 @foreach (var category in Model)
 {
-    <div>@category.Name</div>
+    if (category.IsActive)
+    {
+        <div class="row">
+            <div class="col-xs-8 col-md-3">@category.Name</div>
+            <div class="col-xs-4 col-md-9 pull-left">
+                <a href="@Url.Content("~/admin/shop/categories/update/" + category.Id)"><i class="fa fa-edit" title="Edit"></i></a>
+                <a href="@Url.Content("~/admin/shop/categories/delete/" + category.Id)" class="confirmAction"><i class="fa fa-trash" title="Delete"></i></a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row inactive">
+            <div class="col-xs-8 col-md-3">@category.Name</div>
+            <div class="col-xs-4 col-md-9 pull-left">
+                <a href="@Url.Content("~/admin/shop/categories/restore/" + category.Id)"><i class="fa fa-refresh" title="Restore"></i></a>
+            </div>
+        </div>
+    }
+}
+
+<!-- Confirmation dialog -->
+<div id="dialog-confirm" class="hidden" title="Confirmation required">
+    Are you want to delete category?
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#dialog-confirm").dialog({
+                autoOpen: false,
+                modal: true
+            });
+
+            $(".confirmAction").click(function (e) {
+                e.preventDefault();
+                var targetUrl = $(this).attr("href");
+
+                $("#dialog-confirm").removeClass("hidden");
+
+                $("#dialog-confirm").dialog({
+                    resizable: false,
+                    buttons: {
+                        "Delete": function () {
+                            window.location.href = targetUrl;
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                }).dialog("open");
+            });
+        });
+    </script>
 }

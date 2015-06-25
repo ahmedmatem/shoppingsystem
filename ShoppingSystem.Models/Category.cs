@@ -13,12 +13,15 @@
         public Category()
         {
             this.Id = Tools.GenerateId();
+            this.IsActive = true;
             this.Products = new HashSet<Product>();
         }
 
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public bool IsActive { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
     }

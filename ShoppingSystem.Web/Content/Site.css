@@ -23,6 +23,10 @@ textarea {
     max-width: 280px;
 }
 
+textarea {
+    width: 280px;
+}
+
 .align-left {
     text-align: left !important;
 }
@@ -35,8 +39,13 @@ textarea {
 .path {
     border-bottom: 1px solid #357ebd;
     margin-bottom: 10px;
+    font-size: 1.5em;
 }
 
     .path a:hover {
         text-decoration: none;
     }
+
+.inactive {
+    color: #cccccc;
+}

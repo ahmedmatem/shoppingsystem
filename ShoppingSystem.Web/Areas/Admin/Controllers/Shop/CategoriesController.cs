@@ -2,6 +2,7 @@
 {
     using System.Web.Mvc;
     using System.Linq;
+    using System.Data.Entity;
 
     using AutoMapper.QueryableExtensions;
 
@@ -10,7 +11,7 @@
 
     public class CategoriesController : AdminBaseController
     {
-        // GET: Admin/Category
+        // GET: Admin/Shop/Categories
         public ActionResult Index()
         {
             var categoryViewModel = this.DbContext.Categories
@@ -22,7 +23,7 @@
             return View(categoryViewModel);
         }
 
-        // GET: Admin/Category/Create
+        // GET: Admin/Shop/Categories/Create
         public ActionResult Create()
         {
             return View();
@@ -30,10 +31,18 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // POST: Admin/Category/Create
+        // POST: Admin/Shop/Categories/Create
         public ActionResult Create(CategoryViewModel model)
         {
-            if (ModelState.IsValid)
+            var existCategoryName = this.DbContext.Categories
+                                        .Any(c => c.Name.Equals(model.Name));
+
+            if (existCategoryName)
+            {
+                ModelState.AddModelError("Name", "Category name \"" + model.Name + "\" already exist!");
+            }
+
+            if (ModelState.IsValid & !existCategoryName)
             {
                 var newCategory = AutoMapper.Mapper.Map<Category>(model);
 
@@ -44,6 +53,59 @@
             }
 
             return View(model);
+        }
+
+        // GET: Admin/Shop/Categories/Update
+        public ActionResult Update(string id)
+        {
+            var matchedCategory = this.DbContext.Categories
+                                    .Where(c => c.Id.Equals(id))
+                                    .Project()
+                                    .To<CategoryViewModel>()
+                                    .FirstOrDefault();
+
+            return View(matchedCategory);
+        }
+
+        // POST: Admin/Shop/Categories/Update
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(CategoryViewModel model)
+        {
+            var matchedCategory = this.DbContext.Categories
+                                    .Find(model.Id);
+
+            if(ModelState.IsValid)
+            {
+                this.DbContext.Entry(matchedCategory).CurrentValues.SetValues(model);
+                this.DbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(matchedCategory);
+        }
+
+        // GET: Admin/Shop/Categories/Delete/id
+        public ActionResult Delete(string id)
+        {
+            var matchedCategory = this.DbContext.Categories.Find(id);
+
+            matchedCategory.IsActive = false;
+            this.DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        // GET: Admin/Shop/Categories/Restore/id
+        public ActionResult Restore(string id)
+        {
+            var matchedCategory = this.DbContext.Categories.Find(id);
+
+            matchedCategory.IsActive = true;
+            this.DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

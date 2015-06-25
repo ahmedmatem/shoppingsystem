@@ -4,14 +4,23 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div class="path">Online Shop</div>
+<div class="path"><i class="fa fa-shopping-cart"></i> Online Shop</div>
 
 <div class="row">
+
     <div class="col-xs-3 col-md-2">
         <a href="@Url.Content("~/admin/shop/categories")" class="thumbnail">
             <img src="@Url.Content("~/content/images/icons/categories_icon.png")" alt="Categories">
         </a>
         <div class="text-center">Categories</div>
     </div>
+
+    <div class="col-xs-3 col-md-2">
+        <a href="@Url.Content("~/admin/shop/products")" class="thumbnail">
+            <img src="@Url.Content("~/content/images/icons/products_icon.png")" alt="Products">
+        </a>
+        <div class="text-center">Products</div>
+    </div>
+
 </div>
 

@@ -10,14 +10,16 @@
         public CategoryViewModel()
         {
             this.Id = Tools.GenerateId();
+            this.IsActive = true;
         }
 
         public string Id { get; set; }
 
         [Required]
-        [Display(Name="Product Name")]
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }
