@@ -8,6 +8,8 @@
         public static void RegisterMappings()
         {
             AutoMapper.Mapper.CreateMap<Category, CategoryViewModel>().ReverseMap();
+
+            AutoMapper.Mapper.CreateMap<Product, ProductViewModel>().ReverseMap();
         }
     }
 }

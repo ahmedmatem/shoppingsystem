@@ -1,19 +1,18 @@
-﻿namespace ShoppingSystem.Models
+﻿namespace ShoppingSystem.Web.Areas.Admin.Models.Shop
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
-
+    
     using ShoppingSystem.Common;
     using ShoppingSystem.Common.Types;
 
-    public class Product
+    public class ProductViewModel
     {
-        public string Id { get; set; }
-
-        public Product()
+        public ProductViewModel()
         {
             this.Id = Tools.GenerateId();
+            this.IsActive = true;
         }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
@@ -31,9 +30,6 @@
 
         public string Description { get; set; }
 
-
-        public Guid CategoryId { get; set; }
-
-        public virtual Category Category { get; set; }
+        public bool IsActive { get; set; }
     }
 }

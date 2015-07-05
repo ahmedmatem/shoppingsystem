@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ShoppingSystem.Web.Areas.Admin.Models.Shop.ProductViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.MenuName = "Shop";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="path"><a href="@Url.Content("~/admin/shop")"><i class="fa fa-shopping-cart"></i> Online Shop</a> <i class="fa fa-angle-right"></i> Products</div>
+
+<h4>Product List <a href="@Url.Content("~/admin/shop/products/create")" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> New Product</a></h4>
+
+<br />
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RealWeight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Measure)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProducedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpiredDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RealWeight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Measure)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProducedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpiredDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
