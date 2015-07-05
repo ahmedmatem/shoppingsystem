@@ -8,7 +8,7 @@
     public class ShoppingSystemDataContext : IdentityDbContext<ApplicationUser>
     {
         public ShoppingSystemDataContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("ShoppingSystemDb", throwIfV1Schema: false)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShoppingSystemDataContext, Configuration>());
         }
